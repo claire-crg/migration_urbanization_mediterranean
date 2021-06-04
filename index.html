@@ -59,6 +59,14 @@
 		line-height: 30%;
 		font-weight: lighter;
 		}
+
+	h5 {
+		font-family: Ubuntu, sans-serif;
+		font-size: .6em;
+		line-height: 30%;
+		font-weight: lighter;
+		}
+
 	p{
 		position: absolute;
 		top: 20%;
@@ -142,6 +150,11 @@
 			</div>
 		</div>
 
+		<div class='session' id='slidebar'>
+			<h5>Year: <label id='active-year'>1990</label></h5>
+			<input id='slider' class='row' type='range' min ='0' max='13' step='1' value='1990'/>
+		</div>
+
 		<script>
 
 			mapboxgl.accessToken ='pk.eyJ1IjoiY2xhaXJlLWNnIiwiYSI6ImNrbnA3bjZxdTAwOHQyb3FwdXhhbDM5d3cifQ.cX3_pLwyHaV0y3N6_X6yaw';
@@ -171,7 +184,9 @@
 						'circle-color': '#dd9944',
 						'circle-opacity': 0.5
 					}
-					'filter': ['==', ['number', ['get', 'Year']], 1190]
+					document.getElementById('slider').addEventListener('input', function(e){
+						var year = parseInt(e.target.value);
+					})
 				});
 			});
 
