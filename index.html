@@ -165,8 +165,13 @@
  			zoom: 3
  		});
 
+			function filterBy(year){
+				var filter=['==', 'Year', year];
+				map.setFilter('urbanization', filter);
+			}
+
 			map.on('load', function(){
-				var filterYear = ['==', ['number', ['get', 'Year']], year];
+				var filterYear = ['==', ['number', ['get', 'Year']], 1990];
 
 				map.addLayer({
 					id: 'urbanization',
@@ -189,16 +194,16 @@
 					'filter': ['all', filterYear]
 				});
 
-				//filterBy(0);
+				filterBy(1990);
 
 				document
 					.getElementById('slider')
 					.addEventListener('input', function(e){
 						var year = parseInt(e.target.value);
-						//filterBy(year);
-						filterYear =['==', ['number', ['get', 'Year']], year];
-						map.setFilter('year', ['all', filterYear]);
-						document.getElementById('active-year').innerText = year;
+						filterBy(year);
+						//filterYear =['==', ['number', ['get', 'Year']], year];
+						//map.setFilter('year', ['all', filterYear]);
+						//document.getElementById('active-year').innerText = year;
 					});
 			});
 
