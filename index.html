@@ -166,7 +166,7 @@
  		});
 
 			map.on('load', function(){
-				var filterYear = ['==', ['number', ['get', 'Year']], year];
+				var filterYear = ['==', ['number', ['get', 'Year']], 1990];
 
 				map.addLayer({
 					id: 'urbanization',
@@ -185,17 +185,19 @@
 						],
 						'circle-color': '#dd9944',
 						'circle-opacity': 0.5
-					}
+					},
+					'filter': ['all', filterYear]
 				});
 
-				filterBy(0);
+				//filterBy(0);
 
 				document
 					.getElementById('slider')
 					.addEventListener('input', function(e){
 						var year = parseInt(e.target.value);
-						filterBy(year);
-						map.setFilter('Year', ['==', ['number', ['get', 'Year']], year]);
+						//filterBy(year);
+						filterYear =['==', ['number', ['get', 'Year']], year];
+						map.setFilter('year', ['all', filterYear]);
 						document.getElementById('active-year').innerText = year;
 					});
 			});
