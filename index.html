@@ -184,7 +184,8 @@
 						'circle-color': '#dd9944',
 						'circle-opacity': 0.5
 					}
-					document
+				});
+				document
 					.getElementById('slider')
 					.addEventListener('input', function(e){
 						var year = parseInt(e.target.value);
@@ -192,7 +193,6 @@
 						//map.setFilter('Year', ['==', ['number', ['get', 'Year']], year]);
 						//document.getElementById('active-year').innerText = year;
 					});
-				});
 			});
 
 
