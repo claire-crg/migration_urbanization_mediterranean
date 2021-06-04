@@ -152,7 +152,7 @@
 
 		<div class='session'>
 			<h5>Year: <label id='active-year'>1990</label></h5>
-			<input id='slider' class='row' type='range' min ='0' max='13'step='1' value='1990'/>
+			<input id='slider' class='row' type='range' min ='0' max='13' step='1' value='1990'/>
 		</div>
 
 		<script>
@@ -166,6 +166,8 @@
  		});
 
 			map.on('load', function(){
+				var filterYear = ['==', ['number', ['get', 'Year']], 1990];
+
 				map.addLayer({
 					id: 'urbanization',
 					type: 'circle',
@@ -185,13 +187,16 @@
 						'circle-opacity': 0.5
 					}
 				});
+
+				filterBy(0);
+
 				document
 					.getElementById('slider')
 					.addEventListener('input', function(e){
 						var year = parseInt(e.target.value);
 						filterBy(year);
-						//map.setFilter('Year', ['==', ['number', ['get', 'Year']], year]);
-						//document.getElementById('active-year').innerText = year;
+						map.setFilter('Year', ['==', ['number', ['get', 'Year']], year]);
+						document.getElementById('active-year').innerText = year;
 					});
 			});
 
