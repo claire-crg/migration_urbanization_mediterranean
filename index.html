@@ -20,7 +20,7 @@
 	  top: 10%;
 	  bottom: 25%;
 	  left:  40%;
-	  width: 100%;
+	  width: 60%;
 	}
 
 	h1{
@@ -161,7 +161,7 @@
 			var map= new mapboxgl.Map({
  			container: 'map',
  			style: 'mapbox://styles/claire-cg/ckpfhyscy0get17o3d3cre1z7',
- 			center: [35,36.77],
+ 			center: [16,36.77],
  			zoom: 3
  		});
 
@@ -178,7 +178,7 @@
 					type: 'circle',
 					source:{
 						type: 'geojson',
-						data:'./urbanization_coords.geojson'
+						data:'./urbanization_coords_5s.geojson'
 					},
 					paint:{
 						'circle-radius': [
