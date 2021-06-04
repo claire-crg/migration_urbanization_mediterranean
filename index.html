@@ -166,7 +166,7 @@
  		});
 
 			map.on('load', function(){
-				var filterYear = ['==', ['number', ['get', 'Year']], 13];
+				var filterYear = ['==', ['number', ['get', 'Year']], year];
 
 				map.addLayer({
 					id: 'urbanization',
