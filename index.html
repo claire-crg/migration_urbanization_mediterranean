@@ -185,8 +185,8 @@
 						'circle-opacity': 0.5
 					}
 					document.getElementById('slider').addEventListener('input', function(e){
-						var year = parseInt(e.target.value);
-						map.setFilter('collisions', ['==', ['number', ['get', 'Year']], year]);
+						var year = parseInt(e.target.Value);
+						map.setFilter('Year', ['==', ['number', ['get', 'Year']], year]);
 					})
 				});
 			});
