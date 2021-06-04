@@ -34,13 +34,6 @@
 		}
 
 	h2 {
-	  font-family: Ubuntu, sans-serif;
-	  font-size: .8em;
-	  line-height: 15%;
-	  font-weight: lighter;
-	}
-
-	h3 {
 		position: absolute;
 		top: 7%;
 	  	font-family: Ubuntu, sans-serif;
@@ -50,10 +43,16 @@
 	  	width: 36%;
 	  	padding-left: 2%;
 	  	padding-right: 2%;
-	  	padding-bottom: 2%;
+	  	padding-bottom: 3%;
 	  	padding-top: 4%;
 	}
 
+	h3 {
+		font-family: Ubuntu, sans-serif;
+		font-size: .8em;
+		line-height: 15%;
+		font-weight: lighter;
+		}
 	p{
 		position: absolute;
 		top: 20%;
@@ -76,9 +75,9 @@
 	#console {
 	  position: absolute;
 	  top: 80%;
-	  left: 45%;
-	  width: 50%;
-	  padding: 10px 20px;
+	  left: 42%;
+	  right: 10%;
+	  padding:20px 10px;
 	  background-color: white;
 	}
 
@@ -87,14 +86,17 @@
 	}
 
 	.row{
-		height: 5%;
+		height: 3%;
 		width: 100%;
 	}
 
 	.label{
-		width: 10%;
-		display: inline-block;
+		font-size: 0.6em;
+		font-family: Ubuntu, sans-serif;
+		width: 5%;
+		display: inline-flex;
 		text-align: center;
+		padding: 0.98%;
 	}
 </style>
 </head>
@@ -107,16 +109,16 @@
 		<h1>Searching for a Connection between Migration and Urbanization</h1></div>
 
 	<div subtitle='subtitle'>
-		<h3>The Meditteranean</h3></div>
+		<h2>The Meditteranean</h2></div>
 
 	<div descriptionpg1='descriptionpg1'>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
 
 	<div id='console'>
-		<h2>Migration and Urbanization over time</h2>
+		<h3>Migration and Urbanization over time</h3>
 
 		<div class='session'>
-			<h2>Urbanization Percentage per Country</h2>
+			<h3>Urbanization Percentage per Country</h3>
 			<div class='row labels'>
 				<div class='label'>1990</div>
 				<div class='label'>1995</div>
@@ -161,7 +163,7 @@
 						100, 30
 						],
 						'circle-color': '#dd9944',
-						'circle-opacity': 0.54
+						'circle-opacity': 0.5
 					}
 				});
 			});
