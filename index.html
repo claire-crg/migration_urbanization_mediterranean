@@ -195,7 +195,7 @@
 					.getElementById('slider')
 					.addEventListener('input', function(e){
 						var year = parseInt(e.target.value);
-						//filterBy(year);
+						filterBy(year);
 						filterYear =['==', ['number', ['get', 'Year']], year];
 						map.setFilter('year', ['all', filterYear]);
 						document.getElementById('active-year').innerText = year;
