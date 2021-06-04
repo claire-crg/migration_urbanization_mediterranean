@@ -186,7 +186,7 @@
 					}
 					document.getElementById('slider').addEventListener('input', function(e){
 						var year = parseInt(e.target.value);
-						map.setFilter('collisions', ['==', ['number', ['get', 'Year']], Year]);
+						map.setFilter('collisions', ['==', ['number', ['get', 'Year']], year]);
 					})
 				});
 			});
