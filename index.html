@@ -150,9 +150,9 @@
 			</div>
 		</div>
 
-		<div class='session' id='slidebar'>
+		<div class='session'>
 			<h5>Year: <label id='active-year'>1990</label></h5>
-			<input id='slider' class='row' type='range' min ='0' max='13' step='1' value='1990'/>
+			<input id='slider' class='row' type='range' min ='0' max='13'step='1' value='1990'/>
 		</div>
 
 		<script>
@@ -171,7 +171,7 @@
 					type: 'circle',
 					source:{
 						type: 'geojson',
-						data:'./urbanization_coords.geojson'
+						data:'./urbanization_coords_5s.geojson'
 					},
 					paint:{
 						'circle-radius': [
@@ -186,6 +186,7 @@
 					}
 					document.getElementById('slider').addEventListener('input', function(e){
 						var year = parseInt(e.target.value);
+						map.setFilter('collisions', ['==', ['number', ['get', 'Year']], Year]);
 					})
 				});
 			});
