@@ -166,13 +166,13 @@
  			zoom: 3
  		});
 
-			var years = ['1990', '1995', '2000', '2005', '2010', '2015', '2020', '2025', '2030', '2035', '2040', '2045', '2050'];
+			//var years = ['1990', '1995', '2000', '2005', '2010', '2015', '2020', '2025', '2030', '2035', '2040', '2045', '2050'];
 
 			function filterBy(year){
 				var filter=['==', 'Year', year];
 				map.setFilter('urbanization', filter);
 
-				document.getElementById('Year').textContent = years[year];
+				//document.getElementById('Year').textContent = years[year];
 			}
 
 			map.on('load', function(){
