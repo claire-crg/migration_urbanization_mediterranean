@@ -166,7 +166,7 @@
  		});
 
 			map.on('load', function(){
-				var filterYear = ['==', ['number', ['get', 'Year']], 1990];
+				var filterYear = ['==', ['number', ['get', 'Year']], year];
 
 				map.addLayer({
 					id: 'urbanization',
@@ -198,7 +198,7 @@
 						//filterBy(year);
 						filterYear =['==', ['number', ['get', 'Year']], year];
 						map.setFilter('year', ['all', filterYear]);
-						document.getElementById('active-year').innerText = 'Year';
+						document.getElementById('active-year').innerText = year;
 					});
 			});
 
