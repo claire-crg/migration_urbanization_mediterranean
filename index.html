@@ -108,10 +108,22 @@
 		font-size: 0.6em;
 		font-family: Ubuntu, sans-serif;
 		width: 5%;
-		display: inline-flex;
+		display: inline-block;
 		text-align: center;
 		padding: 0.98%;
 		padding-bottom: 0%;
+		padding-right: 0;
+	}
+
+	.label2{
+		font-size: 0.6em;
+		font-family: Ubuntu, sans-serif;
+		width: 5%;
+		display: inline-block;
+		text-align: center;
+		padding: 0.98%;
+		padding-bottom: 0%;
+		color: orange;
 	}
 </style>
 </head>
@@ -134,7 +146,7 @@
 
 		<div class='session'>
 			<h4>Urbanization Percentage by Year per Country</h4>
-			<div class='row labels'>
+			<div class='row labels 1'>
 				<div class='label'>1990</div>
 				<div class='label'>1995</div>
 				<div class='label'>2000</div>
@@ -142,12 +154,14 @@
 				<div class='label'>2010</div>
 				<div class='label'>2015</div>
 				<div class='label'>2020</div>
-				<div class='label'>2025</div>
-				<div class='label'>2030</div>
-				<div class='label'>2035</div>
-				<div class='label'>2040</div>
-				<div class='label'>2045</div>
-				<div class='label'>2050</div>
+			</div>
+			<div class = 'row labels 2'>
+				<div class='label2'>2025</div>
+				<div class='label2'>2030</div>
+				<div class='label2'>2035</div>
+				<div class='label2'>2040</div>
+				<div class='label2'>2045</div>
+				<div class='label2'>2050</div>
 			</div>
 		</div>
 
@@ -205,8 +219,24 @@
 						filterYear =['==', ['number', ['get', 'Year']], year];
 						//map.setFilter('year', ['all', filterYear]);
 						document.getElementById('active-year').innerText = year;
+
+						function changeColor(val){
+							if (val>2020){
+								color="orange"
+							}
+							spanText.style.color=color;
+						}
 					});
 			});
+
+			var polyMap =[
+			time0: 'IOM_1990',
+			time1: 'IOM_1995',
+			time2: 'IOM_2000',
+			time3: 'IOM_2005',
+			time4: 'IOM_2010',
+			time5: 'IOM_2015',
+			time6: 'IOM_2020']
 
 
 			</script>
