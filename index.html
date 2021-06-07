@@ -173,16 +173,35 @@
 		<script>
 
 			mapboxgl.accessToken ='pk.eyJ1IjoiY2xhaXJlLWNnIiwiYSI6ImNrbnA3bjZxdTAwOHQyb3FwdXhhbDM5d3cifQ.cX3_pLwyHaV0y3N6_X6yaw';
-			var map= new mapboxgl.Map({
- 			container: 'map',
- 			style: 'mapbox://styles/claire-cg/ckpfhyscy0get17o3d3cre1z7',
- 			center: [16,36.77],
- 			zoom: 3
- 		});
+
+			var map = new mapboxgl.Map({
+	 			container: 'map',
+	 			style:'mapbox://styles/claire-cg/cknp8kyos358h17p19qsr869z',
+	 			center: [16,36.77],
+	 			zoom: 3
+	 		})
+
+			function initializeMap(styleType){
+				var map = new mapboxgl.Map({
+	 			container: 'map',
+	 			style: styleType,
+	 			center: [16,36.77],
+	 			zoom: 3
+	 		});
+		return map;
+		}
+
 
 			function filterBy(year){
 				var filter=['==', 'Year', year];
+				if(year < 1995){
+				map = initializeMap('mapbox://styles/claire-cg/cknp8kyos358h17p19qsr869z')
 				map.setFilter('urbanization', filter);
+			}
+			else{
+				map = initializeMap('mapbox://styles/claire-cg/ckpfhyscy0get17o3d3cre1z7')
+				map.setFilter('urbanization', filter);
+			}
 			}
 
 			map.on('load', function(){
