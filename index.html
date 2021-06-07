@@ -217,26 +217,11 @@
 						var year = parseInt(e.target.value);
 						filterBy(year);
 						filterYear =['==', ['number', ['get', 'Year']], year];
-						//map.setFilter('year', ['all', filterYear]);
 						document.getElementById('active-year').innerText = year;
-
-						function changeColor(val){
-							if (val>2020){
-								color="orange"
-							}
-							spanText.style.color=color;
-						}
 					});
 			});
 
-			var polyMap =[
-			time0: 'IOM_1990',
-			time1: 'IOM_1995',
-			time2: 'IOM_2000',
-			time3: 'IOM_2005',
-			time4: 'IOM_2010',
-			time5: 'IOM_2015',
-			time6: 'IOM_2020']
+			//var polyMap =[time0: 'IOM_1990',time1: 'IOM_1995',time2: 'IOM_2000',time3: 'IOM_2005',time4: 'IOM_2010',time5: 'IOM_2015',time6: 'IOM_2020']
 
 
 			</script>
