@@ -53,12 +53,6 @@
 		line-height: 100%;
 		font-weight: lighter;
 	}
-	h4 {
-		font-family: Ubuntu, sans-serif;
-		font-size: .8em;
-		line-height: 30%;
-		font-weight: lighter;
-		}
 
 	h5 {
 		font-family: Ubuntu, sans-serif;
@@ -99,15 +93,14 @@
 
 	.session{
 		margin-bottom: 5%;
-		list-style: none;
-	 	white-space: hidden;
-		overflow-x: auto;
-		overflow-y: hidden;
 		margin:0;
 		padding:0;
+		width: 100%;
 		}
 
 	.circle:before{
+		float: left;
+		display: inline;
 		content:  '\25CF';
 		font-size: 2em;
 		padding: 0;
@@ -116,16 +109,29 @@
 		opacity: 0.5;
 	}
 
+	h4 {
+		float: left;
+		display: inline;
+		overflow: none;
+		white-space: nowrap;
+		font-family: Ubuntu, sans-serif;
+		font-size: .8em;
+		line-height: 30%;
+		font-weight: lighter;
+		}
+
 	.row{
+		display: inline-block;
 		height: 3%;
 		width: 100%;
 	}
 
 	.label{
+		float: left;
+		display: inline;
 		font-size: 0.6em;
 		font-family: Ubuntu, sans-serif;
 		width: 5%;
-		display: inline-block;
 		text-align: center;
 		padding: 0.98%;
 		padding-bottom: 0%;
@@ -133,10 +139,13 @@
 	}
 
 	.label2{
+		float: left;
+		display: inline;
+		overflow: none;
+		white-space: nowrap;
 		font-size: 0.6em;
 		font-family: Ubuntu, sans-serif;
 		width: 5%;
-		display: inline-block;
 		text-align: center;
 		padding: 0.98%;
 		padding-bottom: 0%;
@@ -165,10 +174,10 @@
 	<div id='console'>
 		<h3>Migration and Urbanization over time</h3>
 
-		<ul class='session'>
-			<li><span class='circle'></span></li>
-			<li><h4>Urbanization Percentage by Year per Country</h4></li>
-			<li class='row labels 1'>
+		<div class='session'>
+			<div><span class='circle'></span></div>
+			<div><h4>Urbanization Percentage by Year per Country</h4></div>
+			<div class='row labels 1'>
 				<div class='label'>1990</div>
 				<div class='label'>1995</div>
 				<div class='label'>2000</div>
@@ -176,16 +185,16 @@
 				<div class='label'>2010</div>
 				<div class='label'>2015</div>
 				<div class='label'>2020</div>
-			</li>
-			<li class = 'row labels 2'>
+			</div>
+			<div class = 'row labels 2'>
 				<div class='label2'>2025</div>
 				<div class='label2'>2030</div>
 				<div class='label2'>2035</div>
 				<div class='label2'>2040</div>
 				<div class='label2'>2045</div>
 				<div class='label2'>2050</div>
-			</li>
-		</ul>
+			</div>
+		</div>
 
 		<div class='session'>
 			<h5>Year: <label id='active-year'>1990</label></h5>
