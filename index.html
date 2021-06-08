@@ -93,6 +93,7 @@
 	}
 
 	.session{
+		list-style: none;
 		margin-bottom: 5%;
 		margin:0;
 		padding:0;
@@ -103,7 +104,7 @@
 		float: left;
 		display: inline;
 		content:  '\25CF';
-		font-size: 2em;
+		font-size: 1.5em;
 		padding: 0;
 		margin: 0;
 		color: #dd9944;
@@ -116,9 +117,32 @@
 		overflow: none;
 		white-space: nowrap;
 		font-family: Ubuntu, sans-serif;
-		font-size: .8em;
-		line-height: 30%;
+		font-size: .7em;
+		line-height: 20%;
 		font-weight: lighter;
+		}
+
+	.square{
+		float: left;
+		display: inline;
+		height: 0.75em;
+		width: 0.75em;
+		padding: 0;
+		margin: 0;
+		background-color: #d7e7ef;
+		opacity: 0.8;
+	}
+
+	h5 {
+		float: left;
+		display: inline;
+		overflow: none;
+		white-space: nowrap;
+		font-family: Ubuntu, sans-serif;
+		font-size: .7em;
+		line-height: 15%;
+		font-weight: lighter;
+		margin-top: 1%;
 		}
 
 	.row{
@@ -180,7 +204,9 @@
 
 		<div class='session'>
 			<div><span class='circle'></span></div>
-			<div><h4>Percentage of Urbanization per Country for Years 1990-2050</h4></div>
+			<div><h4>Percentage of Urbanization per Country for Years 1990-2050</h4></div><br><br>
+			<il class='square'></il>
+			<div><h5>Percentage of Migrants per Country for Years 1990-2020</h5></div>
 			<div class='row labels 1'>
 				<div class='label'>1990</div>
 				<div class='label'>1995</div>
@@ -254,8 +280,6 @@
 						document.getElementById('active-year').innerText = year;
 					});
 			});
-
-			
 
 			</script>
 </body>
