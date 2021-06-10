@@ -257,6 +257,7 @@
 			function filterBy(year){
 				var filter=['==', 'Year', year];
 				map.setFilter('urbanization', filter);
+				map.setFilter('percentage', filter);
 			}
 
 			map.on('load', function(){
