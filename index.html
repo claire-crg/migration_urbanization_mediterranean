@@ -294,6 +294,38 @@
 						document.getElementById('active-year').innerText = year;
 					});
 			});
+			
+			map.addLayer({
+					id: 'percentage',
+					type: 'circle',
+					source:{
+						type: 'geojson',
+						data:'./iom_med_tot.geojson'
+					},
+					paint:{
+						'fill-color': [
+						'interpolate',
+						['linear'],
+						['number', ['get', 'percentage']],
+						13, 0.04,
+						60, 30
+						],
+						'fill-color': '#d7e7ef',
+						'fill-opacity': 0.5
+					},
+					'filter': ['all', filterYear]
+				});
+
+				filterBy(1990);
+
+				document
+					.getElementById('slider')
+					.addEventListener('input', function(e){
+						var year = parseInt(e.target.percentage);
+						filterBy(year);
+						filterYear =['==', ['number', ['get', 'Year']], year];
+						document.getElementById('active-year').innerText = year;
+					});
 
 			</script>
 </body>
