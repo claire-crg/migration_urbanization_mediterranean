@@ -254,11 +254,16 @@
  			zoom: 2.85
  		});
 
-			
+			function filterBy(year){
+				var filter=['==', 'Year', year];
+				var filter=['==', 'iom_year', year];
+				map.setFilter('urbanization', filter);
+				map.setFilter('percentage', filter);
+			}
 
 			map.on('load', function(){
 				var filterYear = ['==', ['number', ['get', 'Year']], 1990];
-				var filterYear2 = ['==', ['number', ['get', 'Year']], 1990];
+				var filterYear2 = ['==', ['number', ['get', 'iom_year']], 1990];
 
 				map.addLayer({
 					id: 'urbanization',
@@ -322,7 +327,7 @@
 					.addEventListener('input', function(e){
 						var year = parseInt(e.target.percentage);
 						filterBy(year);
-						filterYear2 =['==', ['number', ['get', 'Year']], year];
+						filterYear2 =['==', ['number', ['get', 'iom_year']], year];
 						map.setFilter('percentage', filter);
 						document.getElementById('active-year').innerText = year;
 					});
