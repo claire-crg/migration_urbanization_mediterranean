@@ -255,19 +255,50 @@
  		});
 
 			function filterBy(year){
-				//var filter=['==', 'Year', year];
+				var filter=['==', 'Year', year];
 				var filter=['==', 'iom_year', year];
-				//map.setFilter('urbanization', filter);
-				map.setFilter('percentage', filter);
+				map.setFilter('urbanization', filter);
+				map.setFilter('migration', filter);
 			}
 
 			map.on('load', function(){
-				//var filterYear = ['==', ['number', ['get', 'Year']], 1990];
-				var filterYear2 = ['==', ['number', ['get', 'iom_year']], 1990];
+				var filterYear = ['==', ['number', ['get', 'Year']], 1990];
+				var filterYear2 = ['==', ['number', ['get','iom_year']], 1990];
 
-				
-			map.addLayer({
-					id: 'percentage',
+				map.addLayer({
+					id: 'urbanization',
+					type: 'circle',
+					source:{
+						type: 'geojson',
+						data:'./urbanization_coords.geojson'
+					},
+					paint:{
+						'circle-radius': [
+						'interpolate',
+						['linear'],
+						['number', ['get', 'Value']],
+						13, 4,
+						100, 30
+						],
+						'circle-color': '#dd9944',
+						'circle-opacity': 0.5
+					},
+					'filter': ['all', filterYear]
+				});
+
+				filterBy(1990);
+
+				document
+					.getElementById('slider')
+					.addEventListener('input', function(e){
+						var year = parseInt(e.target.value);
+						filterBy(year);
+						filterYear =['==', ['number', ['get', 'Year']], year];
+						document.getElementById('active-year').innerText = year;
+					});
+
+				map.addLayer({
+					id: 'migration',
 					type: 'circle',
 					source:{
 						type: 'geojson',
@@ -285,6 +316,7 @@
 						'fill-opacity': 0.5
 					},
 					'filter': ['all', filterYear2]
+				});
 
 				filterBy(1990);
 
@@ -293,12 +325,10 @@
 					.addEventListener('input', function(e){
 						var year = parseInt(e.target.percentage);
 						filterBy(year);
-						filterYear2 =['==', ['number', ['get', 'iom_year']], year];
-						map.setFilter('percentage', filter);
+						filterYear =['==', ['number', ['get', 'Year']], year];
 						document.getElementById('active-year').innerText = year;
 					});
 				});
-			});
 
 			</script>
 </body>
