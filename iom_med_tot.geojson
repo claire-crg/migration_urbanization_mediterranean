@@ -1,7 +1,5 @@
 {
 "type": "FeatureCollection",
-"name": "iom_med_tot",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "Destination": "Albania", "Origin": "WORLD", "iom_year": 1990, "Value": 66013, "world_tot": 152986157, "percentage": 0.000431497, "Latitude": 41.0, "Longitude": 20.0 }, "geometry": { "type": "Point", "coordinates": [ 20.0, 41.0 ] } },
 { "type": "Feature", "properties": { "Destination": "Albania", "Origin": "WORLD", "iom_year": 1995, "Value": 71354, "world_tot": 161289976, "percentage": 0.000442396, "Latitude": 41.0, "Longitude": 20.0 }, "geometry": { "type": "Point", "coordinates": [ 20.0, 41.0 ] } },
