@@ -2,300 +2,360 @@
 <html>
 
 <head>
-    <meta charset=utf-8 />
-    <title>MA Timeline</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<meta charset='utf-8' />
+<title>Migration and Urbanization in the Mediterranean</title>
+<meta name='viewport' content='width=device-width, initial-scale=1' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css' rel='stylesheet' />
 
-    <!--Leaflet scripts:-->
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
-    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    
-    <!--Plugin scripts:-->
-    <script src="javascripts/leaflet.timeline.js"></script>
-    <script src="javascripts/moment.min.js"></script> 
-    
-    <style>
-        
-        /*This makes the map take the whole window. Width needs to calc(100% - *X*px) for full screen so it knows to resize with the window and leaves space for footer.*/
-        
-        #map { 
-            height: calc(100%); 
-            width: 100%; 
-            position: absolute !important; 
-        }
-        
-        /*This defines the map title properties.*/
-        
-        #title {
-            position: absolute;
-            top: 80%;
-            width: 96%;
-            font-size: 24pt;
-            margin-left: 2%;
-            text-align: left;
-            z-index: 9999;
-        }
-        
-        body {
-            margin: 0;
-            padding: 0;
-            background: whitesmoke;
-            font-family: Lato, sans-serif;
-            color: #0D0000;
-        }
-        
-        /*These bits of code came from the Leaflet.timeline examples on github. They give the timeline slider and buttons a nice size and place.*/
-        
-        .leaflet-bottom.leaflet-left {
-            width: 100%;
-        }
-        
-        .leaflet-control-container.leaflet-timeline-controls{
-        box-sizing: border-box;
-        width: 100%;
-        margin: 0;
-        margin-bottom: 15px;
-        }  
-        
-        .leaflet-control.leaflet-timeline-control {
-        width: 96%;
-        box-sizing: border-box;
-        margin: 2%;
-        margin-bottom: 20px;
-        text-align: center;
-        }
-        
-        /*Sets background of control elements to a grey color.*/
-        
-        .leaflet-control-layers-expanded { 
-            background: #BBBBBB; 
-        }
-        
-        .leaflet-popup-content-wrapper,
-        .leaflet-popup-tip {
-            background-color: #BBBBBB;
-        }
-        
-        /*These are all the variables used in animations and transitions. Change these to change marker colors.*/
-        
-        :root{
-            --settlement-color: #FFFFFF;
-            --towns-color: #BF0A30;
-            --cities-color: #002868;
-            --annex-color: #252525;
-            --border-color: darkgray;
-            --circle-rad: 50%;
-            --pt-opacity: 0.6;
-            --pt-borders: 1px solid black;
-        }        
-        
-        /*These are the keyframes for point change animations. They work pretty well, but could probably be a bit prettier.*/
-        
-        @keyframes sett-in { 
-            from { opacity: 0.0;
-                height: 0px;
-                width: 0px;
-                background-color: var(--settlement-color)}
-            75% {
-                height: 4px;
-                width: 4px;
-                margin-left: -3px;
-                margin-top: -3px}
-            to {
-                background-color: var(--settlement-color);
-                height: 2px;
-                width: 2px;
-                margin-left: -1px;
-                margin-top: -1px}
-        }
-        
-        @keyframes sett-town {
-            from {
-                background-color: var(--settlement-color);
-                height: 4px;
-                width: 4px;
-                margin-left: -2px;
-                margin-top: -2px
-            }
-            50% {
-                background-color: var(--settlement-color);
-            }
-            75% {
-                background-color: var(--towns-color);
-                height: 8px;
-                width: 8px;
-                margin-left: -4px;
-                margin-top: -4px}
-            to {
-                background-color: var(--towns-color);
-                height: 6px;
-                width: 6px;
-                margin-left: -3px;
-                margin-top: -3px
-            }
-        }
+<style>
+	body {
+	  margin: 0;
+	  padding: 0;
+	  font-family: 'Ubuntu', Lora, Arial, Sans-serif;
+	}
 
-        /*These CSS classes define the markers. They are called later in the JS.*/ 
-        
-        .urbPoint {
-        animation: sett-in 0.5s;
-        background-color: var(--settlement-color);
-        border-radius: var(--circle-rad);
-        border: var(--pt-borders);
-        opacity: 0.8;
-        margin-right: -3px;
-        margin-top: -3px
-        }
-        
-        .migrPoint {
-        animation: sett-town 0.5s;
-        background-color: var(--towns-color);
-        border-radius: var(--circle-rad);
-        border: var(--pt-borders);
-        opacity: var(--pt-opacity);
-        }
+	#map {
+	  position: absolute;
+	  top: 10%;
+	  bottom: 25%;
+	  left:  40%;
+	  width: 60%;
+	}
 
-    </style>
+	h1{
+		font-family: Ubuntu, sans-serif;
+		background-color: #F1F1F1;
+		font-size: 2em;
+		font-weight: lighter;
+		top: 0;
+		padding: 2%;
+		margin:0;
+		width: 100%;
+		}
+
+	h2 {
+	  	font-family: Ubuntu, sans-serif;
+	  	font-weight: lighter;
+	  	font-size: 1em;
+	  	background-color: #f1f1f1;
+	  	width: 36%;
+	  	margin: 0;
+	  	padding-left: 2%;
+	  	padding-right: 2%;
+	  	padding-bottom: 2%;
+	  	float: left;
+	}
+
+	h3{
+		font-family: Ubuntu, sans-serif;
+		font-size: .95em;
+		line-height: 100%;
+		font-weight: lighter;
+		padding-bottom: 0;
+        	margin-bottom: 0.5%;
+	}
+
+	h5 {
+		font-family: Ubuntu, sans-serif;
+		font-size: .6em;
+		line-height: 30%;
+		font-weight: lighter;
+		}
+
+	p{
+		width: 36%;
+		padding: 2%;
+		margin-bottom: 0;
+		margin-top: auto;
+		bottom: 0;
+		font-family: Lora;
+		font-size: 0.9em;
+		line-height: 1.3em;
+		background-color: #f1f1f1;
+		padding-bottom: 8%;
+		height: 100%;
+	}
+
+	.piechart1{
+		display: inline-block;
+		margin-left: 25%;
+		left: 50%;
+		width: 40%;
+		height: 40%;
+	}
+
+	a {
+	  text-decoration: none;
+	  color: #2dc4b2;
+	}
+
+	#title{
+		position: absolute;
+	}
+
+	#subtitle{
+		position: relative;
+	}
+
+	#descriptionpg1{
+		position: relative;
+		width: 36%;
+	}
+
+
+
+	#console {
+	  position: absolute;
+	  top: 75%;
+	  left: 42%;
+	  right: 10%;
+	  bottom: 15%;
+	  width: 58%;
+	  margin: 0;
+	  padding: 0;
+	}
+
+	.session{
+		list-style: none;
+		margin-bottom: 5%;
+		margin:0;
+		padding:0;
+		width: 95%;
+		}
+
+	.circle:before{
+		float: left;
+		display: inline;
+		content:  '\25CF';
+		font-size: 1.5em;
+		padding: 0;
+		margin: 0;
+		color: #dd9944;
+		opacity: 0.5;
+	}
+
+	h4 {
+		float: left;
+		display: inline;
+		overflow: none;
+		white-space: nowrap;
+		font-family: Ubuntu, sans-serif;
+		font-size: .7em;
+		line-height: 20%;
+		font-weight: lighter;
+		}
+
+	.square{
+		float: left;
+		display: inline;
+		height: 0.75em;
+		width: 0.75em;
+		padding: 0;
+		margin: 0;
+		background-color: #d7e7ef;
+		opacity: 0.8;
+	}
+
+	h5 {
+		float: left;
+		display: inline;
+		overflow: none;
+		white-space: nowrap;
+		font-family: Ubuntu, sans-serif;
+		font-size: .7em;
+		line-height: 15%;
+		font-weight: lighter;
+		margin-top: 1%;
+		margin-bottom: 2.5%;
+		}
+
+	.row{
+		display: inline-block;
+		height: 5%;
+		width: 100%;
+		padding-top: 0;
+		margin-top: 0;
+		margin-bottom: 1%;
+	}
+
+	.label{
+		float: left;
+		display: inline;
+		font-size: 0.6em;
+		font-family: Ubuntu, sans-serif;
+		width: 6.2%;
+		text-align: center;
+		padding: 0.98%;
+		padding-bottom: 0%;
+		padding-right: 0;
+	}
+
+	.label2{
+		float: left;
+		display: inline;
+		overflow: none;
+		white-space: nowrap;
+		font-size: 0.6em;
+		font-family: Ubuntu, sans-serif;
+		width: 6.2%;
+		text-align: center;
+		padding: 0.98%;
+		padding-bottom: 0%;
+		color: orange;
+	}
+</style>
 </head>
 
 <body>
 
-    <!--These scripts call the geoJSON data. I  could probably make them all one file if I wanted to go through and change all the L.timeline calls.-->
-    
-    <script src="urbanization_coords_5s.geojson" type="text/javascript"></script>
-    <script src="IOM_med_tot_prcnt.geojson" type="text/javascript"></script>
-    
-    <div id='map'></div>
-    
-    <!--This makes the map title.-->
-    
-    <div id='title'>
-        <p style="font-size:18px;line-height:0px">400 Years:</p>
-        <p style="line-height:0px">Massachusetts</p>
-        <p style="font-size:18px; line-height: 0px"> Settlements, Towns, and Cities</p></div>
-        
-    <script>    
-    
-    //This creates the map and sets its variables.
-        
-    var map = L.map('map', {
-        center: [40, 14],
-        zoom: 4,
-        fullscreenControl: {
-            Fullscreen: true
-        }
-      });
-      
-    //This calls map tiles and sets tile variables.
-        
-    var tiles = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png', {
-	   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://nitkin.github.io/">Evan Nitkin</a>',
-	   subdomains: 'abcd',
-	   maxZoom: 19
-    });
-      
-    tiles.addTo(map);
-        
-    //This bit creates the timeline slider, sets its variables, and adds it to the map. Uses the moment plugin to parse dates.
-        
-    var slider = L.timelineSliderControl({
-        formatOutput: function(date){
-        return moment(date).format("YYYY");
-        }, position: "bottomleft",
-        duration: 15000,
-        showTicks: true,
-        waitToUpdateMap: true
-    });
-        
-    map.addControl(slider);
-    
-    //This defines the settlement marker layer. Interfaces with timeline by using L.timeline instead of L.geojson to call the geoJSON file.
-        
-    var urbTimeline = L.timeline(urb, {    
-        pointToLayer: function(feature,latlng) {
-            return L.marker(latlng, {
-        
-                //divIcon lets the markers be defined by the CSS properties above. Useful for using CSS styling & animations. className refers to the CSS class where the style is defined. Other variables defined here (iconSize) take effect after animations complete.
-                
-                icon: L.divIcon({
-                    className: 'urbPoint',
-                    iconSize: [4,4]
-                })
-            });
-       },
-        
-        //Filters out settlement points from the geoJSON file.
-        
-        filter: function(feature,layer){
-            if(feature.properties == "Year"){
-                return feature;
-            }
-        },
-        
-        //Creates on each feature a popup with some info and a mouseover/mouseout function to highligh markers when hovered over by changing opacity.
-        
-        onEachFeature: function(feature,layer) {
-            layer.bindPopup("Settlement of " + "<b style='color:#FFFFFF'>" + feature.properties.name + "</b><br>" + feature.properties.start + " - " + feature.properties.end);
-            layer.on('mouseover', function() {
-                layer.setOpacity(0.3)
-                });
-            layer.on('mouseout', function() {
-                layer.setOpacity(0.6)
-            });
-        }, 
-    });
-        
-    //Adds the markers to map.
-    
-    urbTimeline.addTo(map);
-        
-    //These three variables and .addTos work the same as above for the other marker types.
-        
-    var migrationTimeline = L.timeline(migration, {
-        pointToLayer: function(feature,latlng) {
-            return L.marker(latlng, {
-                icon: L.divIcon({
-                    className: 'migrPoint',
-                    iconSize: [6,6]
-                })
-            });
-       },
-        filter: function(feature,layer){
-            if(feature.properties == "IOM_med_tot_percentage"){
-                return feature;
-            }
-        },
-        onEachFeature: function(feature,layer) {
-            layer.bindPopup("Town of " + "<b style='color:#BF0A30'>" + feature.properties.name + "</b><br>" + feature.properties.start + " - " + feature.properties.end);
-            layer.on('mouseover', function() {
-                layer.setOpacity(0.3)
-            });
-            layer.on('mouseout', function() {
-                layer.setOpacity(0.6);
-            });
-        },    
-    });
-    migrationTimeline.addTo(map);
-        
-    
-    //This adds the four layers to the timeline slider so they all play simultaneously.
-        
-    slider.addTimelines(urbTimeline, migrationTimeline)
+	<div id='map'></div>
 
-    //This is a list of the four layers and text/formatting to pass into the layer control below. 
-        
-    var sourcesLayers = {
-        "<b style='color:#FFFFFF'>Settlements</b>": urbTimeline,
-        "<b style='color:#BF0A30'>Towns</b>": migrationTimeline,
-    };
-    
-    //This controls the layers.    
-    
-    L.control.layers(null, sourcesLayers, {position: "topright", collapsed:false }).addTo(map);
-    
-    </script>
-    
+	<div title='title'>
+		<h1>Migration and Urbanization in the Mediterranean</h1></div>
+
+	<!--<div subtitle='subtitle'>
+		<h2>The Mediterranean</h2></div> -->
+
+	<div descriptionpg1='descriptionpg1'>
+		<p>Europe has led a wave of right wing populism and the implementation of stringent anti-immigration policies at the expense of the well-being of migrants and asylum seekers. Far right groups claim that an overwhelming "invasive" number of migrants come to Europe through the Mediterranean.<br><br>
+		<strong>In mid-year 2020, the International Organization for Migration documented that 14.45% of the world's migrants went to the Mediterranean.</strong><br><br>
+			<img src="./iom_world_med.jpg" alt="Pie Chart Shows 14.45% of world Migrants went to the Meditteranean" class="piechart1"><br><br>
+		Urbanization, the growth of a city, is inherently linked to human migration. While fertility rates contribute to a city's population growth, migration - both internal and international - drives urbanization.<br><br>
+		A closer look at this topic is important to ensure that cities and metropolitan areas have the necessary infrastructure and services to welcome new residents. <br><br>
+		The Mediterranean has received particular attention as it is spoken about as a 'point of entry' to the continent. Far right movements have capilized on citizens' frustrations regarding high unemployment rates and stagnant economies to periodically close their borders to asylum seekers.
+		</p>
+	</div>
+
+	<div id='console'>
+		<h3>Migration and Urbanization over time</h3>
+
+		<div class='session'>
+			<div><span class='circle'></span></div>
+			<div><h4>Percentage of Urbanization per Country for Years 1990-2050</h4></div><br><br>
+			<il class='square'></il>
+			<div><h5>Percentage of Migrants per Country for Years 1990-2020</h5></div>
+			<div class='row labels 1'>
+				<div class='label'>1990</div>
+				<div class='label'>1995</div>
+				<div class='label'>2000</div>
+				<div class='label'>2005</div>
+				<div class='label'>2010</div>
+				<div class='label'>2015</div>
+				<div class='label'>2020</div>
+				<div class='label2'>2025</div>
+				<div class='label2'>2030</div>
+				<div class='label2'>2035</div>
+				<div class='label2'>2040</div>
+				<div class='label2'>2045</div>
+				<div class='label2'>2050</div>
+			</div>
+		</div>
+
+		<div class='session'>
+			<h5>Year: <label id='active-year'>1990</label></h5>
+			<input id='slider' class='row' type='range' min ='1990' max='2050' step='1' value='1990'/>
+		</div>
+	</div>
+
+		<script>
+
+			mapboxgl.accessToken ='pk.eyJ1IjoiY2xhaXJlLWNnIiwiYSI6ImNrbnA3bjZxdTAwOHQyb3FwdXhhbDM5d3cifQ.cX3_pLwyHaV0y3N6_X6yaw';
+			var map= new mapboxgl.Map({
+ 			container: 'map',
+ 			style: 'mapbox://styles/claire-cg/ckpfhyscy0get17o3d3cre1z7',
+ 			center: [14,36.77],
+ 			zoom: 2.85
+ 		});
+			//I tried to remove the choropleth from the basemap but mapbox does not allow me to open the Studio webpage
+
+			function filterBy(year){
+				var filter=['==', 'Year', year];
+				//var filter=['==', 'iom_year', year];
+				map.setFilter('urbanization', filter);
+				//map.setFilter('migration', filter);
+			}
+
+			map.on('load', function(){
+				var filterYear = ['==', ['number', ['get', 'Year']], 1990];
+				//var filterYear2 = ['==', ['number', ['get','iom_year']], 1990];
+
+				map.addLayer({
+					id: 'urbanization',
+					type: 'circle',
+					source:{
+						type: 'geojson',
+						data:'./urbanization_coords.geojson'
+					},
+					paint:{
+						'circle-radius': [
+						'interpolate',
+						['linear'],
+						['number', ['get', 'Value']],
+						13, 4,
+						100, 30
+						],
+						'circle-color': '#dd9944',
+						'circle-opacity': 0.5
+					},
+					'filter': ['all', filterYear]
+				});
+
+				filterBy(1990);
+
+				document
+					.getElementById('slider')
+					.addEventListener('input', function(e){
+						var year = parseInt(e.target.value);
+						filterBy(year);
+						filterYear =['==', ['number', ['get', 'Year']], year];
+						document.getElementById('active-year').innerText = year;
+					});
+
+				//map.addLayer({
+				//	id: 'migration',
+				//	type: 'circle',
+				//	source:{
+				//		type: 'geojson',
+				//		data:'./iom_med_tot.geojson'
+				//	},
+				//	paint:{
+				//		'circle-color': [
+				//		'interpolate',
+				//		['linear'],
+				//		['number', ['get', 'percentage']],
+				//		13, 0.04,
+				//		60, 30
+				//		],
+				//		'fill-color': 
+				//			0,'#d7e7ef',
+				//			0.000131, '#c9dbe7',
+				//			0.000442, '#bbcfde',
+				//			0.001081, '#acc3d5',
+				//			0.001747, '#9eb7cc',
+				//			0.004179, '#90abc4',
+				//			0.006324, '#829fbb',
+				//			0.009530, '#7393b2',
+				//			0.011112, '#6587a9',
+				//			0.037746, '#5d7c9c'
+				//		'fill-opacity': 0.5
+				//	},
+				//	'filter': ['all', filterYear2]
+			//	});
+
+			//	filterBy(1990);
+
+			//	document
+				//	.getElementById('slider')
+				//	.addEventListener('input', function(e){
+				//		var year = parseInt(e.target.percentage);
+				//		filterBy(year);
+				//		filterYear =['==', ['number', ['get', 'Year']], year];
+				//		document.getElementById('active-year').innerText = year;
+				//	});
+				});
+
+
+			</script>
 </body>
-
 </html>
